@@ -3,4 +3,5 @@ import os
 
 load_dotenv()
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+def get_groq_api():
+    return os.getenv("GROQ_API_KEY")
