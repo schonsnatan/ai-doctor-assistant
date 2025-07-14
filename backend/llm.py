@@ -20,6 +20,8 @@ def get_ai_answer(patient_info: dict) -> str:
         f"Medicamentos contínuos: {patient_info['med_continuo']}\n"
         f"Reações adversas passadas: {patient_info['reacoes']}\n"
         f"Diagnóstico inicial do doutor: {patient_info['diagnostico']}\n"
+        f"Diagnóstico inicial do doutor: {patient_info['diagnostico']}\n"
+        f"Informação desejada: {patient_info['info_desejada']}\n"
     )
 
     response = client.chat.completions.create(
