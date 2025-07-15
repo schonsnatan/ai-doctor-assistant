@@ -1,5 +1,6 @@
 __pycache__/
 .env
 *.pyc
-data/indexed_docs/
+data/vector_db
 poetry.lock
+test_rag_pipelines.py
