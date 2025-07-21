@@ -1,5 +1,6 @@
 import streamlit as st
-from backend.llm import get_ai_answer
+from core.patient import Patient
+from core.suggestion_engine import SuggestionEgine
 
 st.set_page_config(page_title="Doctor Assistant", layout="wide")
 st.title("🤖 Doctor Assistant")
@@ -30,33 +31,44 @@ with tab3:
     st.subheader("Análise Inicial do Doutor")
     diagnostico = st.text_area("Diagnóstico / Análise inicial")
 
+sugesstion = SuggestionEgine()
+
+mandatory_fields_filled = True
+if not duration:
+    st.warning("Por favor, informe a duração dos sintomas.")
+    mandatory_fields_filled = False
+if not age:
+    st.warning("Por favor, informe a idade do paciente.")
+    mandatory_fields_filled = False
+if not sintomas:
+    st.warning("Por favor, selecione pelo menos um sintoma.")
+    mandatory_fields_filled = False
+
 with tab4:
     st.subheader("Sugestões Inteligentes")
 
-    patient_info = {
-        "sex": sex,
-        "age": age,
-        "duration": duration,
-        "sintomas": sintomas,
-        "condicoes": condicoes,
-        "alergias": alergias.split(","),
-        "med_continuo": medicamentos_uso_continuo,
-        "reacoes": reacoes_adversas_passado,
-        "diagnostico": diagnostico,
-        "info_desejada": ""
-    }
+    patient = Patient(
+        sex=sex,
+        age=age,
+        duration=duration,
+        sintomas=sintomas,
+        condicoes=condicoes,
+        alergias=alergias,
+        med_continuo=medicamentos_uso_continuo,
+        reacoes=reacoes_adversas_passado,
+        diagnostico=diagnostico
+    )
 
     col1, col2 = st.columns(2)
+
     with col1:
         if st.button("💊 Sugerir Medicamentos"):
-            patient_info["info_desejada"] = "fornecer orientação sobre medicamentos"
             with st.spinner("Analisando..."):
-                suggestion = get_ai_answer(patient_info)
+                suggestion = sugesstion.get_suggestion("medicamentos", patient)
                 st.success(suggestion)
 
     with col2:
         if st.button("🧪 Sugerir Exames"):
-            patient_info["info_desejada"] = "fornecer orientação sobre exames"
             with st.spinner("Analisando..."):
-                suggestion = get_ai_answer(patient_info)
+                suggestion = sugesstion.get_suggestion("exames",patient)
                 st.success(suggestion)
