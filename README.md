@@ -7,12 +7,12 @@ This app simulates a medical assistant that suggests **medications** and **exams
 
 ## Features
 
-- 🔎 Intelligent suggestions of medications and lab exams
-- ✅ Allergy and adverse reaction filtering logic
-- 🧠 LLM reasoning with Groq (LLaMA 3 70B)
-- 🔍 Vector search with FAISS + HuggingFace embeddings
-- 📦 Modular architecture (strategies, services, core models)
-- 🖥️ Interactive UI built with Streamlit
+- Intelligent suggestions of medications and lab exams
+- Allergy and adverse reaction filtering logic
+- LLM reasoning with Groq (LLaMA 3 70B)
+- Vector search with FAISS + HuggingFace embeddings
+- Modular architecture (strategies, services, core models)
+- Interactive UI built with Streamlit
 
 
 
